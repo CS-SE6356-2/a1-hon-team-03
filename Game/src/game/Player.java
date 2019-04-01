@@ -16,16 +16,20 @@ public abstract class Player{
     abstract void bid();
     abstract void splitDeck(Deck deck);
     abstract void giveCards(Player p);
-            
+    abstract Turn takeTurn(List<Turn> hist);
+
     public int getScore(){
         return score;
     }
+
     public Hand getHand(){
         return myHand;
     }
+
     private void setDealer(boolean dealer){
         this.dealer = dealer;
     }
+
     public boolean isDealer(){
         return dealer;
     }

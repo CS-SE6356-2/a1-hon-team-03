@@ -2,7 +2,7 @@
 package game;
 import java.util.*;
 
-public class Deck{
+public class Deck implements Pile {
     ArrayList<Card> deck;
     int numCards = 0;
     
@@ -15,7 +15,12 @@ public class Deck{
            }
        }
     }
-    
+
+    @Override
+    public void pushCard(Card c) {
+        deck.add(c);
+    }
+
     public void shuffle(){
         Collections.shuffle(deck);
     }

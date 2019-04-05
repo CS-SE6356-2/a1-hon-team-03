@@ -1,6 +1,5 @@
 package gui.views.samples;
 
-import main.Main;
 import gui.views.interfaces.Renderable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -10,9 +9,9 @@ public class DynamicObject implements Renderable {
     final int xmov = 5, ymov = 5;
     int xvel = 5, yvel = 5;
 
-    public DynamicObject(int _x, int _y) {
-        x = _x;
-        y = _y;
+    public DynamicObject(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public void render(GraphicsContext gc) {

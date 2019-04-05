@@ -8,6 +8,7 @@ import gui.views.ViewHandler;
 import gui.views.samples.DynamicObject;
 import gui.views.samples.TestOval;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -28,9 +29,10 @@ public class Main extends Application implements Runnable {
     Stage window;
     ViewHandler vh;
 
+    Thread thread;
+
     Canvas canvas;
 
-    private Thread thread;
     private boolean running = false;
 
     public void init() {
@@ -39,18 +41,23 @@ public class Main extends Application implements Runnable {
         for (int i = 0; i < 3; ++i) {
             vh.addRenderable(new ViewCard(Suit.Clubs, 4 * i + 2, WIDTH / 3 * i, 0));
         }
+        vh.addRenderable(new DynamicObject(0, 0));
     }
 
-    @Override
     public void run() {
-        final double ticksPerSecond = 60.0;
-        long lastRun = System.nanoTime();
-        double gapTimeNanos = 1000000000.0 / 60.0;
+        Runnable updater = () -> {
+            render();
+            tick();
+        };
+
+        long lastUpdate = System.nanoTime();
+        final double tickRate = 60.0;
+        final double tickGap = Math.pow(10, 9) / tickRate;
         while (running) {
-            if (System.nanoTime() >= lastRun + gapTimeNanos) {
-                render();
-                tick();
-                lastRun += gapTimeNanos;
+            if (System.nanoTime() >= lastUpdate + tickGap) {
+                // UI update is run on the Application thread
+                Platform.runLater(updater);
+                lastUpdate += tickGap;
             }
         }
     }
@@ -69,7 +76,7 @@ public class Main extends Application implements Runnable {
 
         // painting the whole screen with white
         gc.setFill(Color.WHITE);
-        gc.fillRect(10, 10, WIDTH, HEIGHT);
+        gc.fillRect(0, 0, WIDTH, HEIGHT);
 
         vh.render(gc);
     }
@@ -90,17 +97,19 @@ public class Main extends Application implements Runnable {
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
         primaryStage.show();
 
-
-        running = true;
         thread = new Thread(this);
+        // don't let thread prevent JVM shutdown
+        thread.setDaemon(true);
         thread.start();
+        running = true;
     }
 
     @Override
     public void stop() {
         running = false;
         try {
-            thread.join();
+            if (thread != null)
+                thread.join();
         } catch (Exception e) {
             e.printStackTrace();
         }

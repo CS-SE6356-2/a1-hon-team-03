@@ -1,5 +1,5 @@
 //Shannen Barrameda sib170130 CS3354.HON Team 3
-package game;
+package models;
 public class Card{
     /*A = 1, J = 11, Q = 12, K = 13*/
     public final static int ACE = 1;

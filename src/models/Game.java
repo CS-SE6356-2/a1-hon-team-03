@@ -1,4 +1,4 @@
-package game;
+package models;
 
 import java.util.ArrayList;
 //game uses handler function which handles button presses etc.
@@ -20,8 +20,8 @@ public abstract class Game extends EventHandler {
         rule = "";
     }
     
-    abstract int calcScore(Player p)
-    abstract int evaluateScore()
+    abstract int calcScore(Player p);
+    abstract int evaluateScore();
     
     private ArrayList<View> getViews(){
         return views;

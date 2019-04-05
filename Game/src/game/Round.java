@@ -2,33 +2,34 @@ package game;
 
 import java.util.ArrayList;
 import java.util.Collections;
-abstract class Round {
+import java.util.List;
 
-    private ArrayList<Turn> record;
+abstract class Round<T> {
 
-    // Each of these functions should be expected to be called exactly once
-    // per player turn
-    abstract private bool isFinished();
-    abstract private Player nextPlayer();
-    abstract private int numViewable();
+    private ArrayList<Turn<T>> record;
 
     public Round() {
         record = new ArrayList();
     }
 
-    private List<Turn> getRecord() {
+    // Each of these functions should be expected to be called exactly once
+    // per player turn
+    abstract boolean isFinished();
+
+    abstract Player nextPlayer();
+
+    abstract int numViewable();
+
+    private List<Turn<T>> getRecord() {
         int viewable = numViewable();
         if (record.size() > viewable) {
-            return Collections(unmodifiableList(record.subList(
-                        record.size() - viewable
-                        , record.size()
-            ));
+            return Collections.unmodifiableList(record.subList(record.size() - viewable, record.size()));
         } else {
-            return Collections.unmodifiableList(record.sublist(0, record.size()));
+            return Collections.unmodifiableList(record.subList(0, record.size()));
         }
     }
 
-    public List<Turn> playRound() {
+    public List<Turn<T>> playRound() {
         while (!isFinished()) {
             record.add(nextPlayer().takeTurn(getRecord()));
         }

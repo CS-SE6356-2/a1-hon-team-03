@@ -1,29 +1,41 @@
 package models;
 
 import java.util.ArrayList;
-//game uses handler function which handles button presses etc.
-public abstract class Game extends EventHandler {
-    Deck starter;
-    Deck draw;
-    Deck discard;
-    ArrayList<View> views;
+
+//handles program logic and updates models
+//called when action done on the gui
+public abstract class Game {
+    Deck startDeck;
+    ArrayList<Pile> piles;
     ArrayList<Player> players;
-    ArrayList<Integer> bidList;
-    String rule;
-    
-    public Game(){
-        players = new ArrayList<View>();
-        bidList = new ArrayList<View>();
-        starter = new Deck();
-        draw = new Deck();
-        discard = new Deck();
-        rule = "";
+    ArrayList<Round> rounds;
+    Round currentRound;
+
+    public Game() {
+        players = new ArrayList<Player>();
+        piles = new ArrayList<Pile>();
+        rounds = new ArrayList<Round>();
+        currentRound = null;
     }
-    
+
+    abstract void dealCards();
+
     abstract int calcScore(Player p);
+
     abstract int evaluateScore();
-    
-    private ArrayList<View> getViews(){
-        return views;
+
+    Pile getPile(int num) {
+        if (num < piles.size()) {
+            return piles.get(num);
+        }
+        return null;
     }
+
+    Player getPlayer(int num) {
+        if (num < piles.size()) {
+            return players.get(num);
+        }
+        return null;
+    }
+
 }

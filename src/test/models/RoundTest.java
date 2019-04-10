@@ -1,6 +1,14 @@
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+package test.models;
+
 import models.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 class RoundTest {
     static int countLimit = 10;
@@ -8,20 +16,25 @@ class RoundTest {
     Round round;
     int viewableCalls = 0;
     int playerCalls = 0;
-        void bid() {}
-        void SplitDeck(Deck deck) {}
-        void giveCards(Player p) {}
-        Turn<int> takeTurn(List<Turn<Object>> hist) {
+
+    class PlayerStub extends Player implements Pile {
+        public void pushCard(Card c) {}
+        public Card drawCard() { return new Card(); }
+        public void discardCard() {}
+        public void bid() {}
+        public void splitDeck(Deck deck) {}
+        public void giveCards(Player p) {}
+        public<T> Turn<T> takeTurn(List<Turn<T>> hist) {
             assertTrue(hist.size() <= viewableLimit);
-            return Turn<int>(this, this, 0);
+            return new Turn<T>(this, this, null);
         }
     }
 
     @BeforeEach
     void setup() {
-        round = new class extends Round<int> {
+        round = new Round<Integer>() {
             @Override
-            Player nextPlayer() {
+            public Player nextPlayer() {
                 playerCalls++;
                 if (playerCalls < countLimit) {
                     return new PlayerStub();
@@ -31,11 +44,11 @@ class RoundTest {
             }
 
             @Override
-            int numViewable() {
+            public int numViewable() {
                 viewableCalls++;
                 return viewableLimit;
             }
-        }
+        };
     }
 
     @Test

@@ -6,20 +6,20 @@ import java.util.ArrayList;
 import static java.util.Collections.unmodifiableList;
 import java.util.List;
 
-abstract class Round<T> {
+public abstract class Round<T> {
 
     private ArrayList<Turn<T>> record = new ArrayList<>();
 
     /**
      * should return null if the round is over
      */
-    abstract Player nextPlayer();
+    public abstract Player nextPlayer();
 
     /**
      * returns the number of cards played in the last round a given player
      * should be able to see in order to inform their next turn
      */
-    abstract int numViewable();
+    public abstract int numViewable();
 
 
     /**

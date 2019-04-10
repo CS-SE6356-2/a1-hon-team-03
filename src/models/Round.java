@@ -1,40 +1,47 @@
 package models;
 
+import com.sun.istack.internal.NotNull;
+
 import java.util.ArrayList;
-import java.util.Collections;
+import static java.util.Collections.unmodifiableList;
 import java.util.List;
 
 abstract class Round<T> {
 
-    private ArrayList<Turn<T>> record;
+    private ArrayList<Turn<T>> record = new ArrayList<>();
 
-    public Round() {
-        record = new ArrayList();
-    }
-
-    // Each of these functions should be expected to be called exactly once
-    // per player turn
-    abstract boolean isFinished();
-
+    /**
+     * should return null if the round is over
+     */
     abstract Player nextPlayer();
 
+    /**
+     * returns the number of cards played in the last round a given player
+     * should be able to see in order to inform their next turn
+     */
     abstract int numViewable();
 
+
+    /**
+     * retrieves the last numViewable() turns.
+     */
+    @NotNull
     private List<Turn<T>> getRecord() {
-        int viewable = numViewable();
-        if (record.size() > viewable) {
-            return Collections.unmodifiableList(record.subList(record.size() - viewable, record.size()));
-        } else {
-            return Collections.unmodifiableList(record.subList(0, record.size()));
-        }
+        int sz = record.size();
+        int start = Integer.max(sz - numViewable(), 0);
+        return unmodifiableList(record.subList(sz - start, sz));
+    }
+
+    // Each of the abstract functions should be called exactly once per player
+    // turn based on the default implementation
+    private boolean takeTurn() {
+        Player next = nextPlayer();
+        if (next != null) record.add(next.takeTurn(getRecord()));
+        return next != null;
     }
 
     public List<Turn<T>> playRound() {
-        while (isFinished() == false) {
-            record.add(nextPlayer().takeTurn(getRecord()));
-        }
-
+        while (takeTurn());
         return record.subList(0, record.size());
     }
-
 }

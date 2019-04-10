@@ -1,25 +1,17 @@
 package main;
 
-import gui.components.card.model.CardNumber;
 import gui.components.card.model.Suit;
 import gui.components.card.view.ViewCard;
-import gui.components.imageloaders.CardImageLoader;
 import gui.views.ViewHandler;
 import gui.views.samples.DynamicObject;
-import gui.views.samples.TestOval;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.util.HashMap;
 
 
 public class Main extends Application implements Runnable {
@@ -45,7 +37,7 @@ public class Main extends Application implements Runnable {
     }
 
     public void run() {
-        Runnable updater = () -> {
+        final Runnable updater = () -> {
             render();
             tick();
         };

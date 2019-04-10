@@ -1,8 +1,10 @@
-package gui.views.samples;
+package view.views.samples;
 
-import gui.views.interfaces.Renderable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+
+import gui.views.interfaces.Renderable;
+import main.Main;
 
 public class DynamicObject implements Renderable {
     int x = 0, y = 0;

@@ -2,6 +2,7 @@ package test.models;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
 import models.*;
 import java.util.List;
 
@@ -18,7 +19,7 @@ class RoundTest {
         public Card drawCard() { return new Card(); }
         public void discardCard() {}
         public void bid() {}
-        public void SplitDeck(Deck deck) {}
+        public void splitDeck(Deck deck) {}
         public void giveCards(Player p) {}
         public<T> Turn<T> takeTurn(List<Turn<T>> hist) {
             assertTrue(hist.size() <= viewableLimit);

@@ -2,6 +2,8 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
+
 interface Phase {
-    public Map<Player, int> scorePhase();
+    public Map<Player, Integer> scorePhase();
 }

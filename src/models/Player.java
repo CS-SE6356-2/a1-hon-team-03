@@ -13,17 +13,17 @@ public abstract class Player {
         score = 0;
     }
 
-    abstract Card drawCard();
+    public abstract Card drawCard();
 
-    abstract void discardCard();
+    public abstract void discardCard();
 
-    abstract void bid();
+    public abstract void bid();
 
-    abstract void splitDeck(Deck deck);
+    public abstract void splitDeck(Deck deck);
 
-    abstract void giveCards(Player p);
+    public abstract void giveCards(Player p);
 
-    abstract <T> Turn<T> takeTurn(List<Turn<T>> hist);
+    public abstract <T> Turn<T> takeTurn(List<Turn<T>> hist);
 
     public int getScore() {
         return score;

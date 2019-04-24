@@ -1,12 +1,10 @@
-package gui.components.imageloaders;
+package view.components.imageloaders;
 
-import gui.components.card.model.CardNumber;
-import gui.components.card.model.Suit;
 import javafx.scene.image.Image;
+import view.components.card.model.CardNumber;
+import view.components.card.model.Suit;
 
-import javax.smartcardio.Card;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
 
 public class CardImageLoader extends ImageLoader {
 
@@ -19,7 +17,7 @@ public class CardImageLoader extends ImageLoader {
     public static Image LoadCardImage(Suit suit, CardNumber num) {
         final String imagePath = String.format("%s/%s/%s_of_%s.png", assetsFolder, pngFolder, CardNumber.NumberToString(num), suit.name().toLowerCase());
         try {
-            return ImageLoader.loadImageFromFileSystem(imagePath);
+            return loadImageFromFileSystem(imagePath);
         } catch (FileNotFoundException fnfe) {
             return null;
         }

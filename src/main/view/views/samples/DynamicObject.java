@@ -3,8 +3,7 @@ package view.views.samples;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-import gui.views.interfaces.Renderable;
-import main.Main;
+import view.views.interfaces.Renderable;
 
 public class DynamicObject implements Renderable {
     int x = 0, y = 0;
@@ -23,10 +22,10 @@ public class DynamicObject implements Renderable {
     }
 
     public void tick() {
-        if (x == Main.WIDTH) xvel = -xmov;
+        if (x == 900) xvel = -xmov;
         else if (x == 0) xvel = xmov;
 
-        if (y == Main.HEIGHT) yvel = -yvel;
+        if (y == 600) yvel = -yvel;
         else if (y == 0) yvel = ymov;
 
         x += xvel;

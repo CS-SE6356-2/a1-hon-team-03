@@ -1,4 +1,4 @@
-package gui.views.interfaces;
+package view.views.interfaces;
 
 import javafx.scene.canvas.GraphicsContext;
 

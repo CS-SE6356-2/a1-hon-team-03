@@ -1,9 +1,5 @@
 package main;
 
-import gui.components.card.model.Suit;
-import gui.components.card.view.ViewCard;
-import gui.views.ViewHandler;
-import view.views.samples.DynamicObject;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -12,6 +8,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import view.components.card.model.Suit;
+import view.components.card.view.ViewCard;
+import view.views.ViewHandler;
+import view.views.samples.DynamicObject;
 
 
 public class Main extends Application implements Runnable {
@@ -156,6 +156,6 @@ public class Main extends Application implements Runnable {
 
 
     public static void main(String[] args) {
-        launch(args);
+        launch(args); // gui launch
     }
 }

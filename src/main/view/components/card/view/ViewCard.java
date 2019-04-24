@@ -1,14 +1,11 @@
-package gui.components.card.view;
+package view.components.card.view;
 
-import gui.components.ViewComponent;
-import gui.components.card.model.CardNumber;
-import gui.components.card.model.Suit;
-import gui.components.imageloaders.CardImageLoader;
-import gui.views.interfaces.Renderable;
+import view.components.ViewComponent;
+import view.components.card.model.CardNumber;
+import view.components.card.model.Suit;
+import view.components.imageloaders.CardImageLoader;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-
-import javax.smartcardio.Card;
 
 public class ViewCard extends ViewComponent {
     private Suit suit;

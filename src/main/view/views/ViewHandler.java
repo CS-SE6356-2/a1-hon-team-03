@@ -1,7 +1,7 @@
-package gui.views;
+package view.views;
 
-import gui.views.interfaces.Renderable;
 import javafx.scene.canvas.GraphicsContext;
+import view.views.interfaces.Renderable;
 
 import java.util.ArrayList;
 

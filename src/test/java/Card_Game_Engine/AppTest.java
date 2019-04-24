@@ -4,6 +4,7 @@
 package test.java.Card_Game_Engine;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class AppTest {

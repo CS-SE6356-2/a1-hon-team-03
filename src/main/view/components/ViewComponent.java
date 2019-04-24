@@ -1,7 +1,7 @@
-package gui.components;
+package view.components;
 
-import gui.views.interfaces.Renderable;
 
+import view.views.interfaces.Renderable;
 
 public abstract class ViewComponent implements Renderable {
     protected int x, y;

@@ -1,4 +1,4 @@
-package gui.components.imageloaders;
+package view.components.imageloaders;
 
 import javafx.scene.image.Image;
 

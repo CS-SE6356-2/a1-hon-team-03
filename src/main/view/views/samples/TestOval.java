@@ -1,6 +1,6 @@
-package gui.views.samples;
+package view.views.samples;
 
-import gui.views.interfaces.Renderable;
+import view.views.interfaces.Renderable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
